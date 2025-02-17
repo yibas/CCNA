@@ -1,7 +1,7 @@
 TASK1: COLLAPSED BACKBONE: BASIC LAYER3 CONFIGURATION.
 !@@@CORE SWITCH SA TAAS
 config t
-   hostname COREtaas-_
+   hostname COREtaas-22
    enable secret pass
    service password-encryption
    no logging console
@@ -16,26 +16,26 @@ config t
       exec-timeout 0 0
    Int Vlan 1
      no shutdown
-	 ip add 10.__.1.2 255.255.255.0
+	 ip add 10.22.1.2 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10.__.10.2 255.255.255.0
+	 ip add 10.22.10.2 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10.__.50.2 255.255.255.0
+	 ip add 10.22.50.2 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10.__.100.2 255.255.255.0
+	 ip add 10.22.100.2 255.255.255.0
 	 description VOICEVLAN
 end
 
 !!!DAPAT 7 UNDER_SCORE ANG NA EDIT MO  ( LINE 34 to 68 PASTE TO COREBABA SWITCH )
 !@@@LeafSwitchONLY
 config t
-   hostname COREbaba-_
+   hostname COREbaba-22
    enable secret pass
    service password-encryption
    no logging console
@@ -51,22 +51,22 @@ config t
    Int Gi 0/1
      no shutdown
 	  no switchport
-	  ip add 10._._.4 255.255.255.0
+	  ip add 10.22.22.4 255.255.255.0
    Int Vlan 1
      no shutdown
-	 ip add 10._.1.4 255.255.255.0
+	 ip add 10.22.1.4 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10._.10.4 255.255.255.0
+	 ip add 10.22.10.4 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10._.50.4 255.255.255.0
+	 ip add 10.22.50.4 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10._.100.4 255.255.255.0
+	 ip add 10.22.100.4 255.255.255.0
 	 description VOICEVLAN
 end
 
@@ -98,31 +98,31 @@ Int Range fa0/10-12
 !!!DAPAT 21 UNDER SCORE ANG NA EDIT MO  ( LINE 72 to 99 PASTE TO COREBABA SWITCH )
 !@@@LEAF SWITCH
 config t
-ip dhcp Excluded-add 10._.1.1 10._.1.100
-ip dhcp Excluded-add 10._.10.1 10._.10.100
-ip dhcp Excluded-add 10._.50.1 10._.50.100
-ip dhcp Excluded-add 10._.100.1 10._.100.100
+ip dhcp Excluded-add 10.22.1.1 10.22.1.100
+ip dhcp Excluded-add 10.22.10.1 10.22.10.100
+ip dhcp Excluded-add 10.22.50.1 10.22.50.100
+ip dhcp Excluded-add 10.22.100.1 10.22.100.100
 ip dhcp pool MGMTDATA
-   network 10._.1.0 255.255.255.0
-   default-router 10._.1.4
+   network 10.22.1.0 255.255.255.0
+   default-router 10.22.1.4
    domain-name MGMTDATA.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool WIFIDATA
-   network 10._.10.0 255.255.255.0
-   default-router 10._.10.4
+   network 10.22.10.0 255.255.255.0
+   default-router 10.22.10.4
    domain-name WIFIDATA.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool IPCCTV
-   network 10._.50.0 255.255.255.0
-   default-router 10._.50.4
+   network 10.22.50.0 255.255.255.0
+   default-router 10.22.50.4
    domain-name IPCCTV.COM
-   dns-server 10._.1.10
+   dns-server 10.22.1.10
 ip dhcp pool VOICEVLAN
-   network 10._.100.0 255.255.255.0
-   default-router 10._.100.4
+   network 10.22.100.0 255.255.255.0
+   default-router 10.22.100.4
    domain-name VOICEVLAN.COM
-   dns-server 10._.1.10
-   option 150 ip 10._.100.8   
+   dns-server 10.22.1.10
+   option 150 ip 10.22.100.8   
    END
 
 !!CREATING AND PLACING PORTS INSIDEAVLAN:
@@ -171,11 +171,11 @@ Int Fa 0/7
 config t
 ip routing
 ip dhcp pool CAMERA6
-host 10._.50.6 255.255.255.0
-client-identifier ____.____.____
+host 10.22.50.6 255.255.255.0
+client-identifier 001a.0704.7f6a
 ip dhcp pool CAMERA8
-host 10._.50.8 255.255.255.0
-client-identifier____.____.____
+host 10.22.50.8 255.255.255.0
+client-identifier 001a.0709.c238
 end
 show ip dhcp binding
 
