@@ -94,7 +94,7 @@ int e0/0
 A1: creating Floating Default route and Secondary Default Route:
 config t
 ip route 0.0.0.0 0.0.0.0 192.168.1.129 1
-ip route 0.0.0.0 0.0.0.0 192.168.1.130 2
+ip route 0.0.0.0 0.0.0.0 192.168.1.130 5
 do sh ip route static
 A2:
 config t
@@ -104,7 +104,7 @@ int e1/0
 A2: creating primary and backup default route:
 config t
 ip route 0.0.0.0 0.0.0.0 192.168.1.130 1
-ip route 0.0.0.0 0.0.0.0 192.168.1.129  2
+ip route 0.0.0.0 0.0.0.0 192.168.1.129 5
 do sh ip route static
 p1:
 config t
@@ -114,7 +114,9 @@ int e0/0
 P1: Creating Floating STATIC routes on p1 for vlan 200 and vlan 20:
 config t
 ip route  192.168.1.128 255.255.255.224 10.2.1.1 1
-ip route  192.168.1.130 255.255.255.255 10.2.1.2 10
+!Ang tawag dito ay NETWORK STATIC ROUTE
+ip route  192.168.1.130 255.255.255.255 10.2.1.2 
+!Ang tawag dito ay HOST STATIC ROUTE
 ! /32 is better than /27: longest prefix Rule.
 do sh ip route static
 p2:
@@ -136,14 +138,14 @@ How to Create Default Route Cisco/PC/EndDevices:
 p1:
 config T
 ip route 0.0.0.0  0.0.0.0 10.2.1.1 1
-ip route 0.0.0.0  0.0.0.0 10.2.1.2 2
+ip route 0.0.0.0  0.0.0.0 10.2.1.2 5
 !floating Static Routes
 do sh ip route static
 
 p2:
 config T
 ip route 0.0.0.0  0.0.0.0 10.2.1.2 1
-ip route 0.0.0.0  0.0.0.0 10.2.1.1 2
+ip route 0.0.0.0  0.0.0.0 10.2.1.1 5
 do sh ip route static
 
 D1:
@@ -199,7 +201,7 @@ router eigrp 100
  network 10.1.4.4 0.0.0.3
  end
 !HOW TO CHECK IF EIGRP IS WORKING PROPERLY:
-SIR: show ip protocols
+SIR: show ip route eigrp
 SIEN: show ip EIGRP neighbors --> super, meron kapitbahay
 SIET: show ip eigrp topology --> super, madami ang P, P lahat
 show ip eigrp traffic
