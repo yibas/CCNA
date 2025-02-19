@@ -360,7 +360,7 @@ ip route 0.0.0.0 0.0.0.0 null 0
 ip route 10.0.0.0 255.0.0.0 209.9.9.1
 end
 
-Isp4:
+Isp4: GOOGLE IS AN ISP
 config t
 int lo 8
  ip add 8.8.8.8 255.255.255.255
