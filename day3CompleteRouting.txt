@@ -5,6 +5,33 @@ r1 to r4: ospf 1:
 config t
  no router ospf 1
  do sh ip protocols
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###### give IP address/pri/secondary default GW to S1 and S2:
 @@S1
 config t
@@ -14,7 +41,7 @@ int e1/0
  do bp
 !These are floating Default Static routes with redundancy
  ip route 0.0.0.0 0.0.0.0 192.168.1.129 1
- ip route 0.0.0.0 0.0.0.0 192.168.1.130 2
+ ip route 0.0.0.0 0.0.0.0 192.168.1.130 5
  do sh ip route static
 @@S2
 config t
@@ -23,7 +50,7 @@ int e1/0
  ip add 10.2.2.133 255.255.255.0
  do bp
  ip route 0.0.0.0 0.0.0.0 10.2.2.2 1
- ip route 0.0.0.0 0.0.0.0 10.2.2.1 2
+ ip route 0.0.0.0 0.0.0.0 10.2.2.1 10
  do sh ip route static
 R4
 config t
@@ -37,11 +64,11 @@ ip dhcp excluded-add 10.2.1.200 10.2.1.254
 ip dhcp pool vlan10
   network 10.2.1.0 255.255.255.0
   default-router 10.2.1.254
-!#ipasok d1 port e1/0 sa vlan 200
+!#ipasok d1 port e1/0 sa vlan 100
 config t
 int e1/0
    switchport mode access
-   switchport access vlan 200
+   switchport access vlan 100
    do show vlan brief
 !
 D2:
