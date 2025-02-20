@@ -56,7 +56,9 @@ no shut
 ip add 192.168.102.11 255.255.255.0
 !@telnet use secureCRT: telnet 192.168.108.5
 !in SEcureCRT, Paste This:
-config t
+line vty 0 20
+ transport input all
+ exec-timeout 0 0
 IP ROUTE 0.0.0.0  0.0.0.0 208.8.8.2
 ip name-server 8.8.8.8 1.1.1.1
 ip domain-lookup
@@ -304,15 +306,15 @@ Top 5 UTM: 1.FortinetFortigate: syet
 
 Firewall Profile no.1: use ExtendedACL vs NamedExtendedAcl:
 ex.1: you are the Blue Team/SOC guys for pogo sites:
-www.web310.com open only http, https, ping
-www.web311.com open only dns, https, ssh       ==> 6 lines:
+www.web310.com open only http = 80/, https = 443/, ping
+www.web311.com open only dns = 53/, https = 443/, ssh = 22/      ==> 6 lines:
   GOLDEN  FIREWALL FORMULA:  paloalto,fortinet,cisco,checkpoint.
    protocol         hacker    victim       port
 tcp,udp,icmp,IP     Any      web310/11
 Config t
 service timestamps log datetime
 service timestamps debug datetime
-logging 10.m.1.10
+logging 10.22.1.10
 logging trap 5
 NO IP access-list Extended FWP1
 IP access-list Extended FWP1
